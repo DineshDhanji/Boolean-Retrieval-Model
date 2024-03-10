@@ -243,7 +243,7 @@ class BooleanRetrieval:
             user_query
         )
         if validation_result != 0:
-            return validated_query, set()
+            return validated_query, set(), -1
 
         def retrieve_documents_for_term(term: str) -> set:
             if term in self.inverted_index:
@@ -319,7 +319,7 @@ class BooleanRetrieval:
         validation_result, validated_query = self.validate_query_posit_index(user_query)
         if validation_result != 0:
             print(f"Invalid query: {validated_query}")
-            return validated_query, set()
+            return validated_query, set(), -1
         query_tokens = validated_query.split()
         # Extract terms and k value from the validated query
         term1, term2, k = query_tokens[0], query_tokens[1], int(query_tokens[3])
